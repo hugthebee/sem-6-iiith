@@ -1,0 +1,66 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+
+usa_df = pd.read_csv("usa.csv")
+india_df= pd.read_csv("india.csv")
+print(usa_df)
+
+usa_df['Population'] = usa_df['Population'].str.replace(',', '').astype(int)
+bins = np.logspace(3, 8, 50)
+widths = (bins[1:] - bins[:-1])
+hist = np.histogram(usa_df['Population'], bins=bins)
+hist_norm = hist[0]/widths
+hist_per = hist[0]/sum(hist[0])
+hist_norm_per = hist[0] / (widths * sum(hist[0]))
+plt.figure()
+plt.scatter(bins[:-1], hist_norm)
+plt.xscale('log')
+plt.yscale('log')
+plt.xlabel("Population of city")
+plt.ylabel("Log binned cities (USA)")
+plt.title('Population Density of USA')
+plt.grid(True)
+plt.show()
+plt.show()
+
+# hist = np.histogram(np.log10(usa_df['Population']), bins=bins)
+# hist = hist[0] / width
+# plt.figure()
+# plt.bar(bins[:-1], hist, width=width, alpha=0.5, label='USA Population')
+# plt.xlabel('Log10 Population')
+# plt.ylabel('Density')
+# plt.title('Population Density of USA')
+# plt.legend()
+# plt.grid(True)
+# plt.show()
+print(india_df)
+india_df['Population'] = india_df['Population'].str.replace(',', '').astype(int)
+bins = np.logspace(3, 8, 50)
+widths = (bins[1:] - bins[:-1])
+hist = np.histogram(india_df['Population'], bins=bins)
+hist_norm = hist[0]/widths
+hist_per = hist[0]/sum(hist[0])
+hist_norm_per = hist[0] / (widths * sum(hist[0]))
+plt.figure()
+plt.scatter(bins[:-1], hist_norm)
+plt.xscale('log')
+plt.yscale('log')
+plt.xlabel("Population of city")
+plt.ylabel("Log binned states (India)")
+plt.title('Population Density of India')
+plt.grid(True)
+plt.show()
+plt.show()
+
+# hist = np.histogram(np.log10(india_df['Population']), bins=bins)
+# hist = hist[0] / width
+# plt.figure()
+# plt.bar(bins[:-1], hist, width=width, alpha=0.5, label='India Population')
+# plt.xlabel('Log10 Population')
+# plt.ylabel('Density')
+# plt.title('Population Density of India')
+# plt.legend()
+# plt.grid(True)
+# plt.show()
